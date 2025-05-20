@@ -1,102 +1,71 @@
-import Image from "next/image";
+import React, { useState } from 'react';
 
-export default function Home() {
+export default function LoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div className="min-h-screen flex flex-col justify-between bg-white">
+      {/* Logo Section */}
+      <div className="flex flex-col items-center mt-8">
+        <img
+          src="/logo.png"
+          alt="Next Talent Logo"
+          className="w-64 h-64 rounded-3xl object-contain mb-8"
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      {/* Login Form */}
+      <div className="flex flex-col items-center w-full px-4">
+        <div className="w-full max-w-xl">
+          <label className="block text-gray-500 mb-1" htmlFor="email">Email/Phone Number</label>
+          <input
+            id="email"
+            type="text"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            className="w-full mb-4 px-2 py-2 border border-gray-300 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+          />
+          <label className="block text-gray-500 mb-1" htmlFor="password">Password</label>
+          <div className="relative mb-4">
+            <input
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              className="w-full px-2 py-2 border border-gray-300 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded pr-20"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 font-medium"
+            >
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
+          </div>
+          <button className="w-full py-2 bg-gray-200 text-2xl text-gray-800 font-medium rounded mb-2 hover:bg-gray-300 transition">Log In</button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <a href="#" className="text-blue-700 mt-2 mb-8 text-center">Forgot Password?</a>
+      </div>
+
+      {/* Create Account Section */}
+      <div className="w-full flex flex-col items-center mb-8">
+        <h2 className="text-xl text-blue-700 font-normal mb-4">Create a new account</h2>
+        <div className="flex flex-row justify-center w-full max-w-xl gap-4 mb-8">
+          <a href="#" className="flex-1 text-center font-bold text-lg">As a Coach</a>
+          <a href="#" className="flex-1 text-center font-bold text-lg">As a Player</a>
+          <a href="#" className="flex-1 text-center font-bold text-lg">As an Agent</a>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="w-full border-t border-gray-200 py-4 flex flex-row justify-center gap-6 text-blue-700 text-sm">
+        <a href="#">Support</a>
+        <a href="#">Terms</a>
+        <a href="#">About Us</a>
+        <a href="#">Privacy</a>
+        <a href="#">Language</a>
       </footer>
     </div>
   );
